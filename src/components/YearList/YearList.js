@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import styles from './Yearlist.module.css';
 
 export class YearList extends Component {
   constructor() {
@@ -11,9 +12,13 @@ export class YearList extends Component {
   render() {
     const {range} = this.props;
     return (
-      <div>
-        {range.map(item => {
-          return <span>{item}</span>;
+      <div className={styles.wrapper}>
+        {range.map((item, index) => {
+          return (
+            <button className={styles.button} type="button" key={index + index}>
+              {item}
+            </button>
+          );
         })}
       </div>
     );
