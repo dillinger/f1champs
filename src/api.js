@@ -1,6 +1,6 @@
 import {getNestedValue, catchErrors} from './utils';
 
-const API = `http://ergast.com/api/f1`;
+const API = `https://ergast.com/api/f1`;
 const RESULTS_PATH = 'results/1/drivers.json';
 const STANDING_PATH = 'driverStandings/1.json';
 
