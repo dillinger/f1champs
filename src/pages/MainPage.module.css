@@ -1,0 +1,14 @@
+.section {
+  position: relative;
+  top: -20px;
+  width:90%;
+  margin:auto;
+  background-color: #ffffff;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+.contentSection {
+  margin-top: 40px;
+
+}

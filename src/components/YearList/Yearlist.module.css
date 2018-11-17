@@ -1,5 +1,4 @@
 .wrapper {
-  height: 50px;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
@@ -11,7 +10,7 @@
 }
 
 .button {
-  border: 1px solid red ;
-  padding: 10px 15px;
-  display: inline-block;
+  padding: 15px 20px;
+  border: none;
+  background-color: #fff;
 }

@@ -1,0 +1,20 @@
+.appTitle {
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.wrapper {
+  background: linear-gradient(
+      top,
+      rgba(25, 5, 100, 0.7) 0%,
+      rgba(255, 25, 50, 0.7) 100%
+    ),
+    url('/title-bg.jpg') repeat 0 0;
+    background-size: 100% auto;
+}
