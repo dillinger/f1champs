@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styles from './DriversList.module.css';
 
-export function Racer(props) {
+export default function Racer(props) {
   return (
     <tr className={ `${styles.tabelRow} ${props.champ ? styles.champion : ''}` }>
     <td className=''>{props.index + 1}</td>
@@ -12,7 +12,7 @@ export function Racer(props) {
   );
 }
 
-export class DriverList extends Component {
+export class DriversList extends Component {
   render() {
     return (
       <table className={styles.driverTabe}>

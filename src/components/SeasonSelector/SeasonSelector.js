@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import styles from './Yearlist.module.css';
+import styles from './SeasonSelector.module.css';
 
-export class YearList extends Component {
+export default class SeasonSelector extends Component {
   constructor() {
     super();
     this.state = {

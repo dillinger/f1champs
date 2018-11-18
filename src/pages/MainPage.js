@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-import {YearList} from 'components/YearList/YearList';
+import SeasonSelector from 'components/SeasonSelector/SeasonSelector';
 import Header from 'components/Header/Header';
-import {DriverList} from 'components/DriverList/DriverList';
+import DriversList from 'components/DriversList/DriversList';
 import Loader from 'components/Loader/Loader';
 
 import FetchData from 'containers/FetchData';
@@ -18,7 +18,7 @@ export default class MainPage extends Component {
             return (<React.Fragment>
               <Header selectedYear={selectedYear} />
               <div className={styles.section}>
-                <YearList
+                <SeasonSelector
                   selectedYear={selectedYear}
                   onYearChange={handleClick}
                   range={years}
@@ -28,7 +28,7 @@ export default class MainPage extends Component {
                   <Loader />
                 ) : (
                   <div className={styles.contentSection}>
-                    <DriverList drivers={drivers} />
+                    <DriversList drivers={drivers} />
                   </div>
                 )}
               </div>
