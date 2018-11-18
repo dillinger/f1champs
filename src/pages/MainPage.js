@@ -30,6 +30,7 @@ export default class MainPage extends Component {
           return {
             drivers,
             loading: false,
+            selectedYear: query
           };
         });
       });
@@ -43,7 +44,6 @@ export default class MainPage extends Component {
     e.preventDefault();
     this.fetchData(query);
     this.setState({
-      selectedYear: query,
       loading: true
     });
   }
