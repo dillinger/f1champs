@@ -1,5 +1,5 @@
 .appTitle {
-  color: #fff;
+  color: var(--white);
   text-transform: uppercase;
   height: var(--headerHeight);
   display: flex;

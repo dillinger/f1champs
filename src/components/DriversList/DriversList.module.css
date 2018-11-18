@@ -6,7 +6,7 @@
 }
 
 .tableBody > * + * {
-  border-top: 1px solid #e8e8e8;
+  border-top: 1px solid var(--tableBorder);
 }
 
 .tabelRow td {
@@ -14,5 +14,5 @@
 }
 
 .champion {
-  background-color: #ffffb8;
+  background-color: var(--championBG);
 }

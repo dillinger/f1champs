@@ -1,4 +1,9 @@
 :root {
   --headerHeight: 200px;
   --bodyOverlap: 40px;
+
+  --championBG: #ffffb8;
+  --dotedBorder: #dcd3d3;
+  --tableBorder: #e8e8e8;
+  --white: #fff;
 }
