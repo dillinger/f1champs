@@ -7,7 +7,7 @@ export function getNestedValue(path) {
 
 export function catchErrors(description = '') {
   return err => {
-    console.log(description, err);
+    console.error(description, err);
     return err;
   };
 }

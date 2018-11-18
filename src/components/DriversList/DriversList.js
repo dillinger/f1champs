@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './DriversList.module.css';
 
 export function Racer(props) {
-  console.log(props);
   return (
     <tr className={`${styles.tabelRow} ${props.champ ? styles.champion : ''}`}>
       <td>{props.index + 1}</td>
