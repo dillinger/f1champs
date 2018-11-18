@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import {getNestedValue, catchErrors} from '../utils';
-import {ergastAPI} from '../services/ergastService';
 import {genRangeYearArray} from '../utils';
 
 const API = `https://ergast.com/api/f1`;
@@ -51,17 +50,15 @@ export default class FetchData extends Component {
   }
 
   fetchData(query) {
-    ergastAPI(query)
-      .getData()
-      .then(drivers => {
-        this.setState((state, props) => {
-          return {
-            drivers,
-            isLoading: false,
-            selectedYear: query,
-          };
-        });
+    this.getData(query).then(drivers => {
+      this.setState((state, props) => {
+        return {
+          drivers,
+          isLoading: false,
+          selectedYear: query,
+        };
       });
+    });
   }
 
   handleClick(e, query) {
@@ -84,8 +81,8 @@ export default class FetchData extends Component {
       .then(getNestedValue(pathToStandings));
   }
 
-  getData() {
-    return Promise.all([this.getResults(), this.getStandings()])
+  getData(year) {
+    return Promise.all([this.getResults(year), this.getStandings(year)])
       .then(this.findChampion)
       .catch(catchErrors());
   }
@@ -96,8 +93,8 @@ export default class FetchData extends Component {
 
   render() {
     const propsToPass = Object.assign({}, this.state, {
-      handleClick: this.handleClick
-    })
+      handleClick: this.handleClick,
+    });
     return <React.Fragment>{this.props.children(propsToPass)}</React.Fragment>;
   }
 }
