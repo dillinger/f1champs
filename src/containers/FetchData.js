@@ -23,7 +23,7 @@ export default class FetchData extends Component {
     super(props);
     this.state = {
       isLoading: true,
-      selectedYear: '2005',
+      selectedYear: 2005,
       years: genRangeYearArray(2005, 2015),
       drivers: [],
     };
@@ -84,7 +84,7 @@ export default class FetchData extends Component {
   getData(year) {
     return Promise.all([this.getResults(year), this.getStandings(year)])
       .then(this.findChampion)
-      .catch(catchErrors());
+      .catch(catchErrors('getData'));
   }
 
   componentDidMount() {

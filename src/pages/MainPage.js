@@ -15,6 +15,7 @@ export default class MainPage extends Component {
       <React.Fragment>
         <FetchData>
           {({isLoading, selectedYear, years, drivers, handleClick}) => {
+            console.log(isLoading, selectedYear, years, drivers, handleClick);
             return (<React.Fragment>
               <Header selectedYear={selectedYear} />
               <div className={styles.section}>
