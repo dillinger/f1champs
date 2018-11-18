@@ -5,13 +5,22 @@ export class YearList extends Component {
   constructor() {
     super();
     this.state = {
-      selected: 0,
+      selectedYear: '',
     };
+  }
+
+  componentDidMount() {
+    this.setState({
+      selectedYear: this.props.selectedYear
+    });
   }
 
   handleClick(e, data) {
     e.preventDefault();
-    this.props.onChange(e, data);
+    this.props.onYearChange(e, data);
+    this.setState({
+      selectedYear: data,
+    });
   }
 
   render() {
@@ -21,10 +30,14 @@ export class YearList extends Component {
         {range.map((item, index) => {
           return (
             <button
-              onClick={(e) => {
+              onClick={e => {
                 this.handleClick(e, item);
               }}
               className={styles.button}
+              style={{
+                borderBottom:
+                  this.state.selectedYear.toString() === item.toString() ? '1px solid red' : 'none',
+              }}
               type="button"
               key={index + index}
             >
