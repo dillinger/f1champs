@@ -13,9 +13,6 @@ export function Racer(props) {
 }
 
 export class DriverList extends Component {
-  constructor() {
-    super();
-  }
   render() {
     return (
       <table className={styles.driverTabe}>

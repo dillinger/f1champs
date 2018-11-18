@@ -1,4 +1,4 @@
-import {getNestedValue, catchErrors} from './utils';
+import {getNestedValue, catchErrors} from '../utils';
 
 const API = `https://ergast.com/api/f1`;
 const RESULTS_PATH = 'results/1/drivers.json';

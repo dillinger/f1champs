@@ -9,13 +9,25 @@ export class YearList extends Component {
     };
   }
 
+  handleClick(e, data) {
+    e.preventDefault();
+    this.props.onChange(e, data);
+  }
+
   render() {
     const {range} = this.props;
     return (
       <div className={styles.wrapper}>
         {range.map((item, index) => {
           return (
-            <button className={styles.button} type="button" key={index + index}>
+            <button
+              onClick={(e) => {
+                this.handleClick(e, item);
+              }}
+              className={styles.button}
+              type="button"
+              key={index + index}
+            >
               {item}
             </button>
           );

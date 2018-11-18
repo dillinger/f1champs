@@ -1,8 +1,7 @@
 .appTitle {
   color: #fff;
-  text-align: center;
   text-transform: uppercase;
-  height: 200px;
+  height: var(--headerHeight);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +10,7 @@
 
 .wrapper {
   background: linear-gradient(
-      top,
+      to bottom,
       rgba(25, 5, 100, 0.7) 0%,
       rgba(255, 25, 50, 0.7) 100%
     ),
