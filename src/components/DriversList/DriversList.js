@@ -3,11 +3,11 @@ import styles from './DriversList.module.css';
 
 export function Racer(props) {
   return (
-    <tr className={`${styles.tabelRow} ${props.champ ? styles.champion : ''}`}>
-      <td>{props.index + 1}</td>
-      <td>{props.givenName}</td>
-      <td>{props.familyName}</td>
-      <td>{props.nationality}</td>
+    <tr className={`${styles.tabelRow} ${props.position === '1' ? styles.champion : ''}`}>
+      <td>{props.position}</td>
+      <td>{props.Driver.givenName}</td>
+      <td>{props.Driver.familyName}</td>
+      <td>{props.Driver.nationality}</td>
     </tr>
   );
 }
@@ -20,7 +20,7 @@ export default function DriversList(props) {
         {drivers.length
           ? drivers.map((item, index) => {
               return (
-                <Racer key={index + item.driverId} {...item} index={index} />
+                <Racer key={index + item.Driver.driverId} {...item} index={index} />
               );
             })
           : null}

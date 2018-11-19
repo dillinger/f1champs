@@ -4,18 +4,14 @@ import {getNestedValue, catchErrors} from '../utils';
 import {genRangeYearArray} from '../utils';
 
 const API = `https://ergast.com/api/f1`;
-const RESULTS_PATH = 'results/1/drivers.json';
-const STANDING_PATH = 'driverStandings/1.json';
+const STANDING_PATH = 'driverStandings.json';
 
-const pathToDrivers = ['MRData', 'DriverTable', 'Drivers'];
 const pathToStandings = [
   'MRData',
   'StandingsTable',
   'StandingsLists',
   0,
   'DriverStandings',
-  0,
-  'Driver',
 ];
 
 export default class FetchData extends Component {
@@ -50,7 +46,7 @@ export default class FetchData extends Component {
   }
 
   fetchData(query) {
-    this.getData(query).then(drivers => {
+    this.getStandings(query).then(drivers => {
       this.setState((state, props) => {
         return {
           drivers,
@@ -69,22 +65,11 @@ export default class FetchData extends Component {
     });
   }
 
-  getResults(year) {
-    return fetch(`${API}/${year}/${RESULTS_PATH}`)
-      .then(this.checkJsonType)
-      .then(getNestedValue(pathToDrivers));
-  }
-
   getStandings(year) {
     return fetch(`${API}/${year}/${STANDING_PATH}`)
       .then(this.checkJsonType)
-      .then(getNestedValue(pathToStandings));
-  }
-
-  getData(year) {
-    return Promise.all([this.getResults(year), this.getStandings(year)])
-      .then(this.findChampion)
-      .catch(catchErrors('getData'));
+      .then(getNestedValue(pathToStandings))
+      .catch(catchErrors());
   }
 
   componentDidMount() {
