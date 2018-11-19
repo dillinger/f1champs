@@ -5,6 +5,14 @@ import {genRangeYearArray} from '../utils';
 
 const API = `https://ergast.com/api/f1`;
 const STANDING_PATH = 'driverStandings.json';
+const RESULTS_PATH = 'results.json?limit';
+
+const roundPath = [
+  'MRData',
+  'RaceTable',
+  'Races',
+  'Results'
+];
 
 const pathToStandings = [
   'MRData',
@@ -34,19 +42,9 @@ export default class FetchData extends Component {
       : Promise.reject(new Error("We haven't got JSON!"));
   }
 
-  findChampion([drivers, champ]) {
-    return drivers.map(driver => {
-      return driver.driverId === champ.driverId
-        ? {
-            champ: true,
-            ...driver,
-          }
-        : driver;
-    });
-  }
-
   fetchData(query) {
-    this.getStandings(query).then(drivers => {
+    this.getSeasonResult(query).then(drivers => {
+      console.log(drivers);
       this.setState((state, props) => {
         return {
           drivers,
@@ -59,20 +57,55 @@ export default class FetchData extends Component {
 
   handleClick(e, query) {
     e.preventDefault();
+    this.setState({ isLoading: true });
     this.fetchData(query);
-    this.setState({
-      isLoading: true,
-    });
   }
 
-  getStandings(year) {
-    return fetch(`${API}/${year}/${STANDING_PATH}`)
-      .then(this.checkJsonType)
-      .then(getNestedValue(pathToStandings))
+  filterWinner(data) {
+    return data.filter(item => item.position === '1')
+  }
+
+  getRoundData(data) {
+    return data.flatMap(items => this.filterWinner(items.Results));
+  }
+
+  getOnlyDrivers(data) {
+    return this.getRoundData(data).map(item => item.Driver);
+  }
+
+  getTotals(year) {
+    return fetch(`${API}/${year}/${RESULTS_PATH}=0`)
+    .then(this.checkJsonType)
+    .then(getNestedValue(['MRData']));
+  }
+
+  getSeasonResult(year) {
+    return this.getTotals(year)
+      .then(response => {
+        console.log(response, `${API}/${year}/${RESULTS_PATH}=${response.total}`)
+        return fetch(`${API}/${year}/${RESULTS_PATH}=${response.total}`)
+          .then(this.checkJsonType);
+      })
+      .then(getNestedValue(roundPath))
+      .then(d => {
+        console.log(d);
+      })
+      .then(response => {
+        return this.getOnlyDrivers(response);
+      })
       .catch(catchErrors());
   }
 
+
+  // getStandings(year) {
+  //   return fetch(`${API}/${year}/${STANDING_PATH}`)
+  //     .then(this.checkJsonType)
+  //     .then(getNestedValue(pathToStandings))
+  //     .catch(catchErrors());
+  // }
+
   componentDidMount() {
+    // this.getSeasonResult('2008')
     this.fetchData(this.state.selectedYear);
   }
 
