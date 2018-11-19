@@ -16,11 +16,19 @@ export default function DriversList(props) {
   const drivers = props.drivers;
   return (
     <table className={styles.driverTabe}>
+      <thead>
+        <tr className={styles.tableHead}>
+          <th>Pos.</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Country</th>
+        </tr>
+      </thead>
       <tbody className={styles.tableBody}>
         {drivers.length
           ? drivers.map((item, index) => {
               return (
-                <Racer key={index + item.Driver.driverId} {...item} index={index} />
+                <Racer key={index + item.Driver.driverId} {...item} />
               );
             })
           : null}

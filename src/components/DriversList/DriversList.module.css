@@ -16,3 +16,8 @@
 .champion {
   background-color: var(--championBG);
 }
+
+.tableHead th {
+  padding: 0 10px 10px 10px;
+  text-align: left;
+}
