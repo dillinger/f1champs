@@ -4,12 +4,12 @@ PWA which presents a list of F1 world champions by seasons.
 
 ## Getting Started
 
-This tutorial help you to setup development environment.
+This tutorial will help you you to setup development environment.
 
 ### Running Locally
 
 Make sure you have installed `Node.js`. *You’ll need to have Node 8.10.0 or later on your local development machine*.
-If not please follow this instruction (Node.js)[https://nodejs.org/en/].
+If not, please follow this instruction (Node.js)[https://nodejs.org/en/].
 
 Cloning and installing all dependency
 ```
@@ -18,7 +18,7 @@ cd f1champs
 npm install
 ```
 
-Running development environment
+Runs development environment
 ```
 npm start
 ```
