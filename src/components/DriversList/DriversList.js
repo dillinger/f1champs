@@ -1,6 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cuid from 'cuid';
 import styles from './DriversList.module.css';
+
+Racer.propTypes = {
+  position: PropTypes.string,
+  Driver: PropTypes.shape({
+    givenName: PropTypes.string,
+    familyName: PropTypes.string,
+    nationality: PropTypes.string,
+  }),
+};
+
+DriversList.propTypes = {
+  drivers: PropTypes.arrayOf(PropTypes.object)
+};
 
 export function Racer(props) {
   return (
