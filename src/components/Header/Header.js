@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Header.module.css';
 
-export default function CurrentYear(props) {
+function CurrentYear(props) {
   return (
     <div className={styles.wrapper}>
     <h1 className={styles.appTitle}>
@@ -11,3 +12,9 @@ export default function CurrentYear(props) {
   </div>
   );
 }
+
+CurrentYear.propTypes = {
+  selectedYear: PropTypes.number,
+};
+
+export default CurrentYear;

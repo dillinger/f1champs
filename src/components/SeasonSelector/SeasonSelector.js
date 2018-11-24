@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import styles from './SeasonSelector.module.css';
 
-export default class SeasonSelector extends Component {
-  constructor() {
-    super();
+class SeasonSelector extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       selectedYear: '',
     };
@@ -11,7 +12,7 @@ export default class SeasonSelector extends Component {
 
   componentDidMount() {
     this.setState({
-      selectedYear: this.props.selectedYear
+      selectedYear: this.props.selectedYear,
     });
   }
 
@@ -36,7 +37,9 @@ export default class SeasonSelector extends Component {
               className={styles.button}
               style={{
                 borderBottom:
-                  this.state.selectedYear.toString() === item.toString() ? '1px solid red' : 'none',
+                  this.state.selectedYear.toString() === item.toString()
+                    ? '1px solid red'
+                    : 'none',
               }}
               type="button"
               key={index + index}
@@ -49,3 +52,11 @@ export default class SeasonSelector extends Component {
     );
   }
 }
+
+SeasonSelector.propTypes = {
+  selectedYear: PropTypes.number,
+  onYearChange: PropTypes.func,
+  range: PropTypes.arrayOf(PropTypes.number),
+};
+
+export default SeasonSelector;

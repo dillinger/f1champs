@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import PropTypes from 'prop-types';
 import {getNestedValue, catchErrors} from '../utils';
 import {genRangeYearArray} from '../utils';
 
@@ -14,7 +14,7 @@ const pathToStandings = [
   'DriverStandings',
 ];
 
-export default class FetchData extends Component {
+class FetchData extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,3 +88,9 @@ export default class FetchData extends Component {
     return <React.Fragment>{this.props.children(propsToPass)}</React.Fragment>;
   }
 }
+
+FetchData.propTypes = {
+  children: PropTypes.func.isRequired,
+};
+
+export default FetchData;
