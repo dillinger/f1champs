@@ -5,6 +5,13 @@ export function getNestedValue(path) {
   };
 }
 
+export function checkJsonType(response) {
+    const contentType = response.headers.get('content-type');
+    return contentType && contentType.includes('application/json')
+      ? response.json()
+      : Promise.reject(new Error("We haven't got JSON!"));
+  }
+
 export function catchErrors(description = '') {
   return err => {
     console.error(description, err);

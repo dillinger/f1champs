@@ -1,25 +1,15 @@
 import React, {Component} from 'react';
 
-import {getNestedValue, catchErrors} from '../utils';
+import {getNestedValue, catchErrors, checkJsonType} from '../utils';
 import {genRangeYearArray} from '../utils';
 
 const API = `https://ergast.com/api/f1`;
-const STANDING_PATH = 'driverStandings.json';
 const RESULTS_PATH = 'results.json?limit';
 
 const roundPath = [
   'MRData',
   'RaceTable',
   'Races',
-  'Results'
-];
-
-const pathToStandings = [
-  'MRData',
-  'StandingsTable',
-  'StandingsLists',
-  0,
-  'DriverStandings',
 ];
 
 export default class FetchData extends Component {
@@ -35,16 +25,8 @@ export default class FetchData extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  checkJsonType(response) {
-    const contentType = response.headers.get('content-type');
-    return contentType && contentType.includes('application/json')
-      ? response.json()
-      : Promise.reject(new Error("We haven't got JSON!"));
-  }
-
   fetchData(query) {
     this.getSeasonResult(query).then(drivers => {
-      console.log(drivers);
       this.setState((state, props) => {
         return {
           drivers,
@@ -73,23 +55,27 @@ export default class FetchData extends Component {
     return this.getRoundData(data).map(item => item.Driver);
   }
 
-  getTotals(year) {
+  fetchTotals(year) {
     return fetch(`${API}/${year}/${RESULTS_PATH}=0`)
-    .then(this.checkJsonType)
+    .then(checkJsonType)
     .then(getNestedValue(['MRData']));
   }
 
+  fetchAllResults(year) {
+    return ({total}) => {
+      return fetch(`${API}/${year}/${RESULTS_PATH}=${total}`)
+        .then(checkJsonType);
+    }
+  }
+
   getSeasonResult(year) {
-    return this.getTotals(year)
-      .then(response => {
-        console.log(response, `${API}/${year}/${RESULTS_PATH}=${response.total}`)
-        return fetch(`${API}/${year}/${RESULTS_PATH}=${response.total}`)
-          .then(this.checkJsonType);
+    return this.fetchTotals(year)
+      .then(this.fetchAllResults(year))
+      .then(respone => {
+        console.log(respone);
+        return respone;
       })
       .then(getNestedValue(roundPath))
-      .then(d => {
-        console.log(d);
-      })
       .then(response => {
         return this.getOnlyDrivers(response);
       })
