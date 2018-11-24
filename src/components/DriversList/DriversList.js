@@ -1,9 +1,14 @@
 import React from 'react';
+import cuid from 'cuid';
 import styles from './DriversList.module.css';
 
 export function Racer(props) {
   return (
-    <tr className={`${styles.tabelRow} ${props.position === '1' ? styles.champion : ''}`}>
+    <tr
+      className={`${styles.tabelRow} ${
+        props.position === '1' ? styles.champion : ''
+      }`}
+    >
       <td>{props.position}</td>
       <td>{props.Driver.givenName}</td>
       <td>{props.Driver.familyName}</td>
@@ -27,9 +32,7 @@ export default function DriversList(props) {
       <tbody className={styles.tableBody}>
         {drivers.length
           ? drivers.map((item, index) => {
-              return (
-                <Racer key={index + item.Driver.driverId} {...item} />
-              );
+              return <Racer key={cuid()} {...item} />;
             })
           : null}
       </tbody>

@@ -57,6 +57,10 @@ export default class FetchData extends Component {
     });
   }
 
+  filterOnlyWinners(data) {
+    return data.filter(item => Number(item.wins));
+  }
+
   handleClick(e, query) {
     e.preventDefault();
     this.fetchData(query);
@@ -69,6 +73,7 @@ export default class FetchData extends Component {
     return fetch(`${API}/${year}/${STANDING_PATH}`)
       .then(this.checkJsonType)
       .then(getNestedValue(pathToStandings))
+      .then(this.filterOnlyWinners)
       .catch(catchErrors());
   }
 
