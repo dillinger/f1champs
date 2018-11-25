@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cuid from 'cuid';
 import styles from './DriversList.module.css';
 
-function Racer(props) {
+export function Racer(props) {
   return (
     <tr
       className={`${styles.tabelRow} ${
@@ -18,7 +18,7 @@ function Racer(props) {
   );
 }
 
-function DriversList(props) {
+export function DriversList(props) {
   const drivers = props.drivers;
   return (
     <table className={styles.driverTabe}>
@@ -53,5 +53,3 @@ Racer.propTypes = {
 DriversList.propTypes = {
   drivers: PropTypes.arrayOf(PropTypes.object)
 };
-
-export default DriversList;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {getNestedValue, catchErrors} from '../utils';
+import {getNestedValue, catchErrors, checkJsonType} from '../utils';
 import {genRangeYearArray} from '../utils';
 
 const API = `https://ergast.com/api/f1`;
@@ -25,24 +25,6 @@ class FetchData extends Component {
     };
 
     this.handleClick = this.handleClick.bind(this);
-  }
-
-  checkJsonType(response) {
-    const contentType = response.headers.get('content-type');
-    return contentType && contentType.includes('application/json')
-      ? response.json()
-      : Promise.reject(new Error("We haven't got JSON!"));
-  }
-
-  findChampion([drivers, champ]) {
-    return drivers.map(driver => {
-      return driver.driverId === champ.driverId
-        ? {
-            champ: true,
-            ...driver,
-          }
-        : driver;
-    });
   }
 
   fetchData(query) {
@@ -71,7 +53,7 @@ class FetchData extends Component {
 
   getStandings(year) {
     return fetch(`${API}/${year}/${STANDING_PATH}`)
-      .then(this.checkJsonType)
+      .then(checkJsonType)
       .then(getNestedValue(pathToStandings))
       .then(this.filterOnlyWinners)
       .catch(catchErrors());

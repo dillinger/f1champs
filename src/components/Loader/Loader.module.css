@@ -1,8 +1,5 @@
 .wrapper {
-  height: calc(100vh - var(--headerHeight));
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
 }
 
 .text {

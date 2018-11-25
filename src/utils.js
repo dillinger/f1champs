@@ -20,3 +20,10 @@ export function genRangeYearArray(min, max) {
   }
   return yearsArray;
 }
+
+export function checkJsonType(response) {
+  const contentType = response.headers.get('content-type');
+  return contentType && contentType.includes('application/json')
+    ? response.json()
+    : Promise.reject(new Error("We haven't got JSON!"));
+}
