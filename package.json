@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "cuid": "^2.1.4",
+    "cuid": "^2.1.8",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
